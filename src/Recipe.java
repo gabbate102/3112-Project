@@ -1,11 +1,12 @@
 package src;
 import java.util.*;
+import java.io.Serializable;
 
 /**
  * Recipe class for storing and managing Recipe objects 
  * @author Giovanni Abbate
  */
-public class Recipe {
+public class Recipe implements Serializable{
   private String recipeID;
   private String author;
   private String recipeURL;
