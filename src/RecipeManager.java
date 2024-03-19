@@ -4,8 +4,8 @@ import java.io.ObjectInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.io.File;
+import java.util.ArrayList;
 
 public class RecipeManager {
   private File recipeListFile = null;
