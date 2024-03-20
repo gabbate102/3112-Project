@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class ShoppingList {
   private ArrayList<Recipe> recipeList;
-  private ArrayList<String> ingredientList;
+  private ArrayList<String[]> ingredientList;
 
   /**
    * Default constructor
@@ -15,7 +15,7 @@ public class ShoppingList {
   public ArrayList<Recipe> getRecipeList() {
     return this.recipeList;
   }
-  public ArrayList<String> getIngredientList() {
+  public ArrayList<String[]> getIngredientList() {
     return this.ingredientList;
   }
   public void addRecipe(Recipe recipe) {

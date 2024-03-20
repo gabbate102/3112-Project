@@ -118,7 +118,7 @@ public class RecipeManager {
    * @param queryRecipe
    * @return matching index, -1 if unsuccesful
    */
-  public int indexSearch(Recipe queryRecipe) {
+  private int indexSearch(Recipe queryRecipe) {
     int matchIndex = -1;
     int searchIndex = 0;
     // while match index equals -1
