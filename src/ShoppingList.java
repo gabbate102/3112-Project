@@ -22,6 +22,6 @@ public class ShoppingList {
     this.recipeList.add(recipe);
   }
   public void removeRecipe(Recipe recipe){
-
+    this.recipeList.remove(recipe);
   }
 }

@@ -137,4 +137,29 @@ public class RecipeManager {
     }
     return matchIndex;
   }
+  /** 
+   * searchByIngredient method searches all recipes for recipes matching the ingredients
+   * in the ingredients list. 
+   * @param ingredients
+   * @return ArrayList<Recipe>
+   */
+  public ArrayList<Recipe> searchByIngredient(String[] ingredients) {
+    ArrayList<Recipe> searchResults = new ArrayList();
+    return searchResults;
+  }
+  /**
+   * searchByName method searches all recipes for a match to name
+   * @param name
+   * @return ArrayList<Recipe>
+   */
+  public ArrayList<Recipe> searchByName(String name) {
+    ArrayList<Recipe> searchResults = new ArrayList();
+    // for each element in recipes, if the name matches name, add to searchResults
+    for (int i = 0; i < recipes.size(); i++) {
+      if (recipes.get(i).getRecipeName().equals(name)) {
+        searchResults.add(recipes.get(i));
+      }
+    }
+    return searchResults;
+  }
 }
