@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class RecipeManager {
   private File recipeListFile = null;
-  private ArrayList<Recipe> recipes = null;
+  private ArrayList<Recipe> recipes = new ArrayList<>();
   /**
    * Default constructor
    */

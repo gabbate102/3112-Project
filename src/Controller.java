@@ -71,10 +71,12 @@ public class Controller {
   }
 
   public static JPanel recipesList() {
-    ArrayList<Recipe> recipes = recipeManager.getRecipes();
     DefaultListModel<Recipe> listModel = new DefaultListModel<>();
+    ArrayList<Recipe> recipes = recipeManager.getRecipes();
+    if (recipes.size() > 0) {
       for (Recipe item : recipes) {
         listModel.addElement(item);
+      }
     }
     JList<Recipe> jlist = new JList<>(listModel);
     JScrollPane scrollPane = new JScrollPane(jlist);
