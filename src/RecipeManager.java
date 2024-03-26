@@ -143,10 +143,23 @@ public class RecipeManager {
    * @param ingredients
    * @return ArrayList<Recipe>
    */
-  public ArrayList<Recipe> searchByIngredient(String[] ingredients) {
+/*   public ArrayList<Recipe> searchByIngredient(String[] ingredients) {
     ArrayList<Recipe> searchResults = new ArrayList();
+
+    for (int i = 0; i < recipes.size(); i++) {
+      ArrayList<String[]> tempIngredientList = recipes.get(i).getIngredients();
+      // for each ingredient in ingredients list, determine if it is in tempIngredientList
+      boolean containsItem = false;
+      for (int j=0; j < ingredients.length; j++) {
+        if (tempIngredientList.contains(ingredients[j])) {
+          containsItem = true;
+        } else {
+          containsItem = false;
+        }
+      }
+    }
     return searchResults;
-  }
+  } */
   /**
    * searchByName method searches all recipes for a match to name
    * @param name
