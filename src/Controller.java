@@ -51,6 +51,8 @@ public class Controller {
     newRecipeButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("newRecipeButton Pressed.");
+        AddRecipeView addRecipeView = new AddRecipeView(recipeManager);
+        addRecipeView.getUrlView();
       }
     });
     searchButton.addActionListener(new ActionListener() {
