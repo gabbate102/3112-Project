@@ -106,8 +106,30 @@ public class RecipeView {
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());
 
+    // Create edit panel to hold editing panes together 
+    JPanel editPanel = new JPanel();
+    // Create text field for recipe name
+    JTextField nameTextField = new JTextField(24);
+    // Create text field for recipe author
+    JTextField authorTextField = new JTextField(24);
+    // Create text field for recipe URL
+    JTextField urlTextField = new JTextField(24);
+    // Create text pane for recipe ingredients
+    JTextPane ingredientsTextPane = new JTextPane();
+    // Create text field for recipe procedure
+    JTextPane procedureTextPane = new JTextPane();
 
-    
+    // Add text fields to edit panel 
+    editPanel.add(nameTextField);
+    editPanel.add(authorTextField);
+    editPanel.add(authorTextField);
+    editPanel.add(urlTextField);
+    editPanel.add(ingredientsTextPane);
+    editPanel.add(procedureTextPane);
+
+    // add edit panel to panel
+    panel.add(editPanel, BorderLayout.CENTER);
+
     // Create button panel to hold buttons 
     JPanel buttonPanel = new JPanel();
     // set the layout to borderlayout
@@ -134,5 +156,7 @@ public class RecipeView {
     buttonPanel.add(saveButton, BorderLayout.EAST);
     // add buttonPanel to panel 
     panel.add(buttonPanel, BorderLayout.SOUTH);
+    // add panel to dialog
+    dialog.add(panel);
   }
 }
