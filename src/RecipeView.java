@@ -46,7 +46,7 @@ public class RecipeView {
 
     return panel;
   }
-  private JToolBar detailsToolBar() {
+  private static JToolBar detailsToolBar() {
     JPanel toolbarPanel = new JPanel();
     JToolBar toolbar = new JToolBar();
     JButton backButton =  new JButton("Back");
