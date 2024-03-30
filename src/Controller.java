@@ -7,7 +7,8 @@ import java.util.List;
 
 public class Controller {
   public static RecipeManager recipeManager = new RecipeManager();
-  static JFrame frame = new JFrame();
+  private static JFrame frame = new JFrame();
+  private static JPanel homePanel = new JPanel();
   
   public static void main(String[] args) {
     /*  IDK IF THIS WORKS 
@@ -27,26 +28,21 @@ public class Controller {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // 400 width and 500 height
     frame.setSize(500, 600);
-    
-    // using border layout
-    frame.setLayout(new BorderLayout());
 
     // create homePanel to display the start page of the app 
-    JPanel homePanel = new JPanel();
     homePanel.setLayout(new BorderLayout());
     // add toolbar
     homePanel.add(mainToolBar(), BorderLayout.NORTH);
     // add recipes list
     homePanel.add(recipesList(), BorderLayout.CENTER);
 
-    frame.add(homePanel, BorderLayout.CENTER);
+    frame.getContentPane().add(homePanel);
     // making the frame visible
     frame.setVisible(true);
   }
 
-  public static JToolBar mainToolBar() {
+  public static JPanel mainToolBar() {
     JPanel toolbarPanel = new JPanel();
-    JToolBar toolbar = new JToolBar();
     JButton newRecipeButton =  new JButton("Add Recipe");
     JButton searchButton = new JButton("Search");
     JButton viewShoppingListButton = new JButton("Shopping List");
@@ -63,14 +59,14 @@ public class Controller {
     });
     viewShoppingListButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        Controller.changePanel(ShoppingListView.shoppingListView());
         System.out.println("viewShoppingListButton Pressed.");
       }
     });
     toolbarPanel.add(newRecipeButton);
     toolbarPanel.add(viewShoppingListButton);
     toolbarPanel.add(searchButton);
-    toolbar.add(toolbarPanel);
-    return toolbar;
+    return toolbarPanel;
   }
 
   public static JPanel recipesList() {
@@ -89,9 +85,20 @@ public class Controller {
     return panel;
   }
 
-  private void changePanel(JPanel panel) {
+  private static void changePanel(JPanel newPanel) {
     frame.getContentPane().removeAll();
-    frame.getContentPane().add(panel);
+    frame.getContentPane().add(newPanel);
+    frame.getContentPane().doLayout();
+    frame.update(frame.getGraphics());
+    frame.revalidate();
+  }
+
+  /**
+   * Static method to allow user to return to home panel
+   */
+  public static void goToHomePanel() {
+    frame.getContentPane().removeAll();
+    frame.getContentPane().add(homePanel);
     frame.getContentPane().doLayout();
     frame.update(frame.getGraphics());
   }

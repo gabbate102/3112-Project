@@ -13,16 +13,18 @@ public class ShoppingListView {
 
     // create toolbar
     JPanel buttonPanel = new JPanel();
-    buttonPanel.setLayout(new BorderLayout());
     JButton backButton = new JButton("Back");
     backButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        // call goToHomePanel to direct user to home
+        Controller.goToHomePanel();
         System.out.println("backButton Pressed.");
       }
     });
     JButton editButton = new JButton("Edit");
     editButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        editShoppingListView();
         System.out.println("editButton Pressed.");
       }
     });
@@ -35,9 +37,9 @@ public class ShoppingListView {
       }
     });
     // Add buttons to buttonPanel
-    buttonPanel.add(backButton, BorderLayout.WEST);
-    buttonPanel.add(editButton, BorderLayout.EAST);
-    buttonPanel.add(clearButton, BorderLayout.EAST);
+    buttonPanel.add(backButton);
+    buttonPanel.add(editButton);
+    buttonPanel.add(clearButton);
 
     // Add button panel to panel
     panel.add(buttonPanel, BorderLayout.NORTH);
