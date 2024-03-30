@@ -158,5 +158,9 @@ public class RecipeView {
     panel.add(buttonPanel, BorderLayout.SOUTH);
     // add panel to dialog
     dialog.add(panel);
+    // set dialog size 
+    dialog.setSize(400, 500);
+    // set dialog to visible 
+    dialog.setVisible(true);
   }
 }
