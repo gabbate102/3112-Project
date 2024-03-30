@@ -24,20 +24,22 @@ public class Controller {
     }
 */
     
-    mainFrame();
-  }
-
-  public static  void mainFrame() {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // 400 width and 500 height
     frame.setSize(500, 600);
-
-    // using no layout managers
+    
+    // using border layout
     frame.setLayout(new BorderLayout());
 
+    // create homePanel to display the start page of the app 
+    JPanel homePanel = new JPanel();
+    homePanel.setLayout(new BorderLayout());
     // add toolbar
-    frame.add(mainToolBar(), BorderLayout.NORTH);
-    frame.add(recipesList(), BorderLayout.CENTER);
+    homePanel.add(mainToolBar(), BorderLayout.NORTH);
+    // add recipes list
+    homePanel.add(recipesList(), BorderLayout.CENTER);
+
+    frame.add(homePanel, BorderLayout.CENTER);
     // making the frame visible
     frame.setVisible(true);
   }
