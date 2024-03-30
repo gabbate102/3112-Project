@@ -12,24 +12,10 @@ import javax.swing.text.StyledDocument;
  * for editing a given recipe
  */
 public class RecipeView {
-  private Recipe recipe;
-  private RecipeManager recipeManager;
-
-  /**
-   * Constructor stores Recipe and RecipeManager objects
-   * @param recipe
-   * @param recipeManager
-   */
-  public RecipeView(Recipe recipe, RecipeManager recipeManager) {
-    this.recipe = recipe;
-    this.recipeManager = recipeManager;
-  }
-
-
   /**
    * detailsView creates the view for viewing recipes
    */
-  public JPanel detailsView() {
+  public static JPanel detailsView(Recipe recipe) {
     // Create panel
     JPanel panel = new JPanel();
     // set layout to border
@@ -101,7 +87,7 @@ public class RecipeView {
   /**
    * editView creates the view for editing recipes
    */
-  public void editView(Recipe recipe) {
+  public static void editView(Recipe recipe) {
     JDialog dialog = new JDialog();
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());

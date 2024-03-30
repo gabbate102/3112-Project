@@ -8,19 +8,10 @@ import javax.swing.*;
  * Requires RecipeManager to be passed in the constructor to allow AddRecipeView to manage recipes
  */
 public class AddRecipeView {
-  private RecipeManager recipemanager;
-
-  /**
-   * Constructor for AddRecipeView
-   * @param recipemanager
-   */
-  public AddRecipeView(RecipeManager recipemanager){
-    this.recipemanager = recipemanager;
-  }
   /**
    * Create dialog to request a URL from the user
    */
-  public void getUrlView() {
+  public static void getUrlView() {
     // Create Dialog
     JDialog dialog = new JDialog();
     // Create panel
@@ -48,7 +39,7 @@ public class AddRecipeView {
     panel.add(submitButton);
     // Add the panel to the dialog, set size of dialog, and set the dialog to visible
     dialog.add(panel);
-    dialog.setSize(400, 200);
+    dialog.setSize(400, 148);
     dialog.setVisible(true);
   }
 }

@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.List;
 
 public class Controller {
-  private static RecipeManager recipeManager = new RecipeManager();
+  public static RecipeManager recipeManager = new RecipeManager();
   static JFrame frame = new JFrame();
   
   public static void main(String[] args) {
@@ -53,8 +53,7 @@ public class Controller {
     newRecipeButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("newRecipeButton Pressed.");
-        AddRecipeView addRecipeView = new AddRecipeView(recipeManager);
-        addRecipeView.getUrlView();
+        AddRecipeView.getUrlView();
       }
     });
     searchButton.addActionListener(new ActionListener() {

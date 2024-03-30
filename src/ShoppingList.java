@@ -2,26 +2,33 @@ package src;
 import java.util.ArrayList;
 
 public class ShoppingList {
-  private ArrayList<Recipe> recipeList;
-  private ArrayList<String[]> ingredientList;
+  private static ArrayList<Recipe> recipeList = new ArrayList<>();
 
   /**
-   * Default constructor
+   * Returns ArrayList of recipes in the shoppinglist
+   * @return ArrayList<Recipe>
    */
-  public ShoppingList() {
-    this.recipeList = new ArrayList<>();
-    this.ingredientList = new ArrayList<>();
+  public static ArrayList<Recipe> getRecipeList() {
+    return recipeList;
   }
-  public ArrayList<Recipe> getRecipeList() {
-    return this.recipeList;
+
+  /**
+   * Adds a recipe to the shopping list
+   * @param recipe
+   */
+  public static void addRecipe(Recipe recipe) {
+    recipeList.add(recipe);
   }
-  public ArrayList<String[]> getIngredientList() {
-    return this.ingredientList;
+  /** 
+   * removes a recipe from the shopping list
+   */
+  public static void removeRecipe(Recipe recipe){
+    recipeList.remove(recipe);
   }
-  public void addRecipe(Recipe recipe) {
-    this.recipeList.add(recipe);
-  }
-  public void removeRecipe(Recipe recipe){
-    this.recipeList.remove(recipe);
+  /**
+   * Clears the shopping list
+   */
+  public static void clearList(){
+    recipeList.clear();
   }
 }
