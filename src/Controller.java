@@ -54,6 +54,7 @@ public class Controller {
     });
     searchButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        Controller.changePanel(SearchView.searchView(recipeManager));
         System.out.println("searchButton Pressed.");
       }
     });
