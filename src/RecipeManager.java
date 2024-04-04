@@ -75,6 +75,12 @@ public class RecipeManager {
    * @param newRecipe
    */
   public void addRecipe(Recipe newRecipe) {
+    // check if the recipe exists
+    int matchIndex = indexSearch(newRecipe);
+    if (matchIndex != -1) {
+      // if the recipe exists call updateRecipe
+      updateRecipe(newRecipe);
+    } 
     this.recipes.add(newRecipe);
     // update recipes file
     this.writeRecipes();
