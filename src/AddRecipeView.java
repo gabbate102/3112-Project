@@ -28,18 +28,32 @@ public class AddRecipeView {
       public void actionPerformed(ActionEvent e) {
         // get the text of the field
         System.out.println(textField.getText());
- 
         // set the text of field to blank
         textField.setText(" ");
+      }
+    });
+    JButton createManuallyButton = new JButton("Enter Manually");
+    // Add action listener
+    createManuallyButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("createManuallyButton pressed");
+        manualRecipeCreate();
       }
     });
     // Add the elements to the panel
     panel.add(labelText);
     panel.add(textField);
+    panel.add(createManuallyButton);
     panel.add(submitButton);
     // Add the panel to the dialog, set size of dialog, and set the dialog to visible
     dialog.add(panel);
     dialog.setSize(400, 148);
     dialog.setVisible(true);
+  }
+
+  private static Recipe manualRecipeCreate() {
+    Recipe recipe = new Recipe();
+    RecipeView.editView(recipe);
+    return recipe;
   }
 }

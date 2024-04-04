@@ -134,6 +134,7 @@ public class RecipeView {
     saveButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("saveButton Pressed.");
+        saveRecipe(recipe);
       }
     });
     // add cancelbutton to buttonpanel
@@ -148,5 +149,12 @@ public class RecipeView {
     dialog.setSize(400, 500);
     // set dialog to visible 
     dialog.setVisible(true);
+  }
+  /**
+   * saveRecipe saves the changes made to the recipe in editRecipeView
+   * @param Recipe
+   */
+  private static void saveRecipe(Recipe recipe) {
+
   }
 }

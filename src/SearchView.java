@@ -11,22 +11,22 @@ public class SearchView {
     // create toolBar
     JPanel toolBar = new JPanel();
 
-    JTextField searchField = new JTextField(24);
+    JTextField searchField = new JTextField(18);
     JButton backButton = new JButton("Back");
     // add actionlistener to backButton 
     backButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("backButton Pressed.");
+        Controller.goToHomePanel();
       }
     });
-    JButton seachButton = new JButton("Search");
+    JButton searchButton = new JButton("Search");
     // add actionlistener to seachButton 
-    seachButton.addActionListener(new ActionListener() {
+    searchButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        System.out.println("seachButton Pressed.");
+        System.out.println("searchButton Pressed.");
         // get the text of the field
         System.out.println(searchField.getText());
- 
         // set the text of field to blank
         searchField.setText(" ");
       }
