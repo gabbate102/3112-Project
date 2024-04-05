@@ -90,45 +90,50 @@ public class RecipeView {
   public static void editView(Recipe recipe) {
     JDialog dialog = new JDialog();
     JPanel panel = new JPanel();
+    JPanel labelPanel = new JPanel();
     panel.setLayout(new BorderLayout());
+
+    // Create JLabel element for nameTextField
+    JLabel nameLabel = new JLabel("Name", SwingConstants.RIGHT);
+    // Create JLabel element for authorTextField
+    JLabel authorLabel = new JLabel("Author", SwingConstants.RIGHT);
+    // Create JLabel element for urlTextField
+    JLabel urlLabel = new JLabel("URL", SwingConstants.RIGHT);
+    // Create JLabel element for ingredientsTextPane
+    JLabel ingredientsLabel = new JLabel("Ingredients", SwingConstants.RIGHT);
+    // Create JLabel element for procedureTextPane
+    JLabel procedureLabel = new JLabel("Procedure", SwingConstants.RIGHT);
 
     // Create edit panel to hold editing panes together 
     JPanel editPanel = new JPanel();
-    // Create JLabel element for nameTextField
-    JLabel nameLabel = new JLabel("Name");
     // Create text field for recipe name
     JTextField nameTextField = new JTextField(24);
-    // Create JLabel element for authorTextField
-    JLabel authorLabel = new JLabel("Author");
     // Create text field for recipe author
     JTextField authorTextField = new JTextField(24);
-    // Create JLabel element for urlTextField
-    JLabel urlLabel = new JLabel("URL");
     // Create text field for recipe URL
     JTextField urlTextField = new JTextField(24);
-    // Create JLabel element for ingredientsTextPane
-    JLabel ingredientsLabel = new JLabel("Ingredients");
     // Create text pane for recipe ingredients
     JTextPane ingredientsTextPane = new JTextPane();
-    // Create JLabel element for procedureTextPane
-    JLabel procedureLabel = new JLabel("Procedure");
     // Create text field for recipe procedure
     JTextPane procedureTextPane = new JTextPane();
 
+    // add labels to labelPanel
+    labelPanel.add(nameLabel);
+    labelPanel.add(authorLabel);
+    labelPanel.add(urlLabel);
+    labelPanel.add(ingredientsLabel);
+    labelPanel.add(procedureLabel);
+
     // Add text fields to edit panel 
-    editPanel.add(nameLabel);
     editPanel.add(nameTextField);
-    editPanel.add(authorLabel);
     editPanel.add(authorTextField);
-    editPanel.add(urlLabel);
     editPanel.add(urlTextField);
-    editPanel.add(ingredientsLabel);
     editPanel.add(ingredientsTextPane);
-    editPanel.add(procedureLabel);
     editPanel.add(procedureTextPane);
 
     // add edit panel to panel
-    panel.add(editPanel, BorderLayout.CENTER);
+    panel.add(labelPanel, BorderLayout.WEST);
+    panel.add(editPanel, BorderLayout.EAST);
 
     // Create button panel to hold buttons 
     JPanel buttonPanel = new JPanel();
