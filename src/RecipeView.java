@@ -92,6 +92,8 @@ public class RecipeView {
     JPanel panel = new JPanel();
     JPanel labelPanel = new JPanel();
     panel.setLayout(new BorderLayout());
+    labelPanel.setLayout(new GridLayout(5,1));
+    
 
     // Create JLabel element for nameTextField
     JLabel nameLabel = new JLabel("Name", SwingConstants.RIGHT);
@@ -106,6 +108,7 @@ public class RecipeView {
 
     // Create edit panel to hold editing panes together 
     JPanel editPanel = new JPanel();
+    editPanel.setLayout(new GridLayout(5,1));
     // Create text field for recipe name
     JTextField nameTextField = new JTextField(24);
     // Create text field for recipe author
@@ -166,7 +169,7 @@ public class RecipeView {
     dialog.add(panel);
     // set dialog size 
     dialog.setSize(400, 500);
-    // set dialog to visible 
+    // set dialog to visible p
     dialog.setVisible(true);
   }
   /**
