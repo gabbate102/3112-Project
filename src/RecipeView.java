@@ -1,5 +1,7 @@
 package src;
+import java.util.*;
 import java.awt.event.*;
+import javax.swing.text.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -110,13 +112,13 @@ public class RecipeView {
     JPanel editPanel = new JPanel();
     editPanel.setLayout(new GridLayout(5,1));
     // Create text field for recipe name
-    JTextField nameTextField = new JTextField(24);
+    JTextField nameTextField = new JTextField(recipe.getRecipeName());
     // Create text field for recipe author
-    JTextField authorTextField = new JTextField(24);
+    JTextField authorTextField = new JTextField(recipe.getAuthor());
     // Create text field for recipe URL
-    JTextField urlTextField = new JTextField(24);
+    JTextField urlTextField = new JTextField(recipe.getRecipeURL());
     // Create text pane for recipe ingredients
-    JTextPane ingredientsTextPane = new JTextPane();
+    JTextPane ingredientsTextPane = new JTextPane(recipe.getIngredientsString());
     // Create text field for recipe procedure
     JTextPane procedureTextPane = new JTextPane();
 

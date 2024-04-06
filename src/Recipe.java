@@ -11,8 +11,8 @@ public class Recipe implements Serializable{
   private String recipeName;
   private String author;
   private String recipeURL;
-  private ArrayList<String[]> ingredients;
-  private ArrayList<String> procedure;
+  private String[] ingredients;
+  private String[] procedure;
 
   /**
    * Default constructor 
@@ -22,7 +22,7 @@ public class Recipe implements Serializable{
   /**
    * Parameterized Constructor 
    */
-  public Recipe(int recipeID, String recipeName, String author, String recipeURL, ArrayList<String[]> ingredients, ArrayList<String> procedure) {
+  public Recipe(int recipeID, String recipeName, String author, String recipeURL, String[] ingredients, String[] procedure) {
     // create new instance of Random to create recipeID
     Random rand = new Random();
     // use rand to create random recipeID
@@ -65,14 +65,14 @@ public class Recipe implements Serializable{
    * getter method for ingredients
    * @return ingredients
    */
-  public ArrayList<String[]> getIngredients() {
+  public String[]  getIngredients() {
     return this.ingredients;
   }
   /**
    * getter method for procedure
    * @return procedure
    */
-  public ArrayList<String> getProcedure() {
+  public String[]  getProcedure() {
     return this.procedure;
   }
   /**
@@ -93,14 +93,28 @@ public class Recipe implements Serializable{
    * setter method for procedure
    * @return void
    */
-  public void setProcedure(ArrayList<String> procedure) {
+  public void setProcedure(String[]  procedure) {
     this.procedure = procedure;
   }
   /**
    * setter method for ingredients
    * @return void
    */
-  public void setIngredients(ArrayList<String[]> ingredients) {
+  public void setIngredients(String[]  ingredients) {
     this.ingredients = ingredients;
+  }
+  public String getIngredientsString() {
+    String ingredientsString = "";
+    for (int i = 0; i < this.ingredients.length; i++) {
+      ingredientsString += ingredients[i] + "\n";
+    }
+    return ingredientsString;
+  }
+  public String getProcedureString() {
+    String procedureString = "";
+    for (int i = 0; i < this.procedure.length; i++) {
+      procedureString += procedure[i] + "\n";
+    }
+    return procedureString;
   }
 }
