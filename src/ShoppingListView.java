@@ -47,7 +47,19 @@ public class ShoppingListView {
     /*
      * TO DO: Add content pane to show shopping list details
      */
-
+    // create recipeList to display contents of shopping list
+    // by converting ArrayList<Recipe> shoppingList into an array
+    JList recipeList = new JList(ShoppingList.getRecipeList().toArray());
+    MouseListener mouseListener = new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          int index = recipeList.locationToIndex(e.getPoint());
+          System.out.println("Double clicked on Item " + index);
+        }
+      }
+    };
+    recipeList.addMouseListener(mouseListener);
+    panel.add(recipeList, BorderLayout.CENTER);
     return panel;
   }
   /**
@@ -65,6 +77,15 @@ public class ShoppingListView {
     // create recipeList to display contents of shopping list
     // by converting ArrayList<Recipe> shoppingList into an array
     JList recipeList = new JList(ShoppingList.getRecipeList().toArray());
+    MouseListener mouseListener = new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          int index = recipeList.locationToIndex(e.getPoint());
+          System.out.println("Double clicked on Item " + index);
+        }
+      }
+    };
+    recipeList.addMouseListener(mouseListener);
     panel.add(recipeList, BorderLayout.CENTER);
 
     // create panel for buttons 

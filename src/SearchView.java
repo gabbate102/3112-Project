@@ -48,6 +48,15 @@ public class SearchView {
     // Create JList element 
     // !!!!!!! TO DO: ADD RESULTS LIST TO JLIST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     JList recipeList = new JList();
+    MouseListener mouseListener = new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          int index = recipeList.locationToIndex(e.getPoint());
+          System.out.println("Double clicked on Item " + index);
+        }
+      }
+    };
+    recipeList.addMouseListener(mouseListener);
     searchPanel.add(recipeList, BorderLayout.CENTER);
 
     // add toolbar to searchPanel
