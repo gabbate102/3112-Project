@@ -75,9 +75,9 @@ public class Controller {
 
   /**
    * This method returns a panel with the main list of recipes.
-   * @return JPanel
+   * @return JList
    */
-  public static JPanel recipesList() {
+  public static JList recipesList() {
     DefaultListModel<Recipe> listModel = new DefaultListModel<>();
     ArrayList<Recipe> recipes = recipeManager.getRecipes();
     if (recipes.size() > 0) {
@@ -95,11 +95,7 @@ public class Controller {
       }
     };
     jlist.addMouseListener(mouseListener);
-    JScrollPane scrollPane = new JScrollPane(jlist);
-
-    JPanel panel = new JPanel();
-    panel.add(scrollPane);
-    return panel;
+    return jlist;
   }
 
   /**
