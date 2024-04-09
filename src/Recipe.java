@@ -8,11 +8,11 @@ import java.io.Serializable;
  */
 public class Recipe implements Serializable{
   private int recipeID;
-  private String recipeName;
-  private String author;
-  private String recipeURL;
-  private String[] ingredients;
-  private String[] procedure;
+  private String recipeName = "";
+  private String author = "";
+  private String recipeURL = "";
+  private String[] ingredients = {""};
+  private String[] procedure = {""};
 
   /**
    * Default constructor 
@@ -81,6 +81,13 @@ public class Recipe implements Serializable{
    */
   public void setRecipeName(String recipeName) {
     this.recipeName = recipeName;
+  }
+  /**
+   * Setter for recipeURL
+   * @param url
+   */
+  public void setURL(String url) {
+    this.recipeURL = url;
   }
   /**
    * setter method for author

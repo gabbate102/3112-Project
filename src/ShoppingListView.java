@@ -74,6 +74,7 @@ public class ShoppingListView {
     cancelButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("cancelButton Pressed.");
+        dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
       }
     });
     JButton deleteButton = new JButton("Delete");

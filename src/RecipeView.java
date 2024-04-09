@@ -118,9 +118,11 @@ public class RecipeView {
     // Create text field for recipe URL
     JTextField urlTextField = new JTextField(recipe.getRecipeURL());
     // Create text pane for recipe ingredients
-    JTextPane ingredientsTextPane = new JTextPane(recipe.getIngredientsString());
+    JEditorPane ingredientsTextPane = new JEditorPane();
+    ingredientsTextPane.setText(recipe.getIngredientsString());
     // Create text field for recipe procedure
-    JTextPane procedureTextPane = new JTextPane();
+    JEditorPane procedureTextPane = new JEditorPane();
+    procedureTextPane.setText(recipe.getProcedureString());
 
     // add labels to labelPanel
     labelPanel.add(nameLabel);
@@ -152,13 +154,22 @@ public class RecipeView {
     cancelButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("cancelButton Pressed.");
+        dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
       }
     });
     // add actionlistener to save button 
     saveButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("saveButton Pressed.");
+        // get the data from each field
+        recipe.setRecipeName(nameTextField.getText());
+        recipe.setAuthor(authorTextField.getText());
+        recipe.setURL(urlTextField.getText());
+        recipe.setIngredients(ingredientsTextPane.getText().split(","));
+        recipe.setProcedure(procedureTextPane.getText().split(","));
         saveRecipe(recipe);
+        
+        dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
       }
     });
     // add cancelbutton to buttonpanel

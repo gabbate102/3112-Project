@@ -11,19 +11,6 @@ public class Controller {
   private static JPanel homePanel = new JPanel();
   
   public static void main(String[] args) {
-    /*  IDK IF THIS WORKS 
-    try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); 
-    } catch (ClassNotFoundException c) {
-      System.out.println(c);
-    } catch (InstantiationException i) {
-      System.out.println(i);
-    } catch (IllegalAccessException ill) {
-      System.out.println(ill);
-    } catch (UnsupportedLookAndFeelException un) {
-      System.out.println(un);
-    }
-*/
     
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // 400 width and 500 height
@@ -41,35 +28,55 @@ public class Controller {
     frame.setVisible(true);
   }
 
+  /**
+   * Method creates main toolbar for home screen 
+   * @return JPanel
+   */
   public static JPanel mainToolBar() {
+    // create toolbarpanel to hold toolbar elements
     JPanel toolbarPanel = new JPanel();
+    // create newRecipeButton
     JButton newRecipeButton =  new JButton("Add Recipe");
+    // create searchButton
     JButton searchButton = new JButton("Search");
+    // create viewShoppingListButton
     JButton viewShoppingListButton = new JButton("Shopping List");
+    // add actionlistener to newRecipeButton
     newRecipeButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("newRecipeButton Pressed.");
+        // open getUrlView
         AddRecipeView.getUrlView();
       }
     });
+    // add action listener to searchButton
     searchButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        // change panel to show searchView
         Controller.changePanel(SearchView.searchView(recipeManager));
         System.out.println("searchButton Pressed.");
       }
     });
+    // add action listener to viewShoppingListButton
     viewShoppingListButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        // change view to shoppingListView
         Controller.changePanel(ShoppingListView.shoppingListView());
         System.out.println("viewShoppingListButton Pressed.");
       }
     });
+    // add buttons to toolbarPanel
     toolbarPanel.add(newRecipeButton);
     toolbarPanel.add(viewShoppingListButton);
     toolbarPanel.add(searchButton);
+    // return toolbarPanel
     return toolbarPanel;
   }
 
+  /**
+   * This method returns a panel with the main list of recipes.
+   * @return JPanel
+   */
   public static JPanel recipesList() {
     DefaultListModel<Recipe> listModel = new DefaultListModel<>();
     ArrayList<Recipe> recipes = recipeManager.getRecipes();
@@ -79,6 +86,15 @@ public class Controller {
       }
     }
     JList<Recipe> jlist = new JList<>(listModel);
+    MouseListener mouseListener = new MouseAdapter() {
+      public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+          int index = jlist.locationToIndex(e.getPoint());
+          System.out.println("Double clicked on Item " + index);
+        }
+      }
+    };
+    jlist.addMouseListener(mouseListener);
     JScrollPane scrollPane = new JScrollPane(jlist);
 
     JPanel panel = new JPanel();
@@ -86,6 +102,10 @@ public class Controller {
     return panel;
   }
 
+  /**
+   * Method changes current panel to panel passed as parameter
+   * @param newPanel
+   */
   private static void changePanel(JPanel newPanel) {
     frame.getContentPane().removeAll();
     frame.getContentPane().add(newPanel);
