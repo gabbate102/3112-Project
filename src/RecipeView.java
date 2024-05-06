@@ -31,24 +31,31 @@ public class RecipeView {
     Style style = doc.addStyle("customStyle", null); 
     StyleConstants.setBold(style, true); 
 
-    // Set the StyledDocument for textPane
-    textPane.setStyledDocument(doc); 
-
     // insert text into document
-    try { 
-      doc.insertString(0, "This is a ", style); 
+    try {
+      doc.insertString(0, recipe.getProcedureString() + "\n", style); 
+      doc.insertString(0, recipe.getIngredientsString() + "\n", style); 
+      doc.insertString(0, recipe.getRecipeURL() + "\n", style); 
+      doc.insertString(0, recipe.getAuthor() + "\n", style); 
+      doc.insertString(0, recipe.getRecipeName() + "\n", style); 
+      
       doc.insertString(doc.getLength(), "button: ", null); 
     } 
     catch (BadLocationException e) { 
       e.printStackTrace(); 
     } 
+
+    // Set the StyledDocument for textPane
+    textPane.setStyledDocument(doc); 
+
+    panel.add(textPane, BorderLayout.CENTER);
     
     // add toolbar to panel
-    panel.add(detailsToolBar(), BorderLayout.NORTH);
+    panel.add(detailsToolBar(recipe), BorderLayout.NORTH);
 
     return panel;
   }
-  private static JToolBar detailsToolBar() {
+  private static JToolBar detailsToolBar(Recipe recipe) {
     JPanel toolbarPanel = new JPanel();
     JToolBar toolbar = new JToolBar();
     JButton backButton =  new JButton("Back");
@@ -60,16 +67,19 @@ public class RecipeView {
     backButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("backButton Pressed.");
+        Controller.goToHomePanel();
       }
     });
     addToShoppingListButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("addToShoppingListButton Pressed.");
+        ShoppingList.addRecipe(recipe);
       }
     });
     editButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("editButton Pressed.");
+        RecipeView.editView(recipe);
       }
     });
     deleteButton.addActionListener(new ActionListener() {

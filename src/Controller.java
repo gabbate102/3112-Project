@@ -77,7 +77,7 @@ public class Controller {
    * This method returns a panel with the main list of recipes.
    * @return JList
    */
-  public static JList recipesList() {
+  public static JList<Recipe> recipesList() {
     DefaultListModel<Recipe> listModel = new DefaultListModel<>();
     ArrayList<Recipe> recipes = recipeManager.getRecipes();
     if (recipes.size() > 0) {
@@ -91,6 +91,10 @@ public class Controller {
         if (e.getClickCount() == 2) {
           int index = jlist.locationToIndex(e.getPoint());
           System.out.println("Double clicked on Item " + index);
+          System.out.println(recipes.get(index).getRecipeName());
+          // open the detailsView
+          JPanel details = RecipeView.detailsView(recipes.get(index));
+          changePanel(details);
         }
       }
     };
