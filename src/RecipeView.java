@@ -4,9 +4,6 @@ import java.awt.event.*;
 import javax.swing.text.*;
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 /**
  * RecipeView class requires the Recipe object to be edited and a 
@@ -92,6 +89,8 @@ public class RecipeView {
     deleteButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("deleteButton Pressed.");
+        Controller.deleteRecipe(recipe);
+        Controller.goToHomePanel();
       }
     });
 
@@ -104,7 +103,7 @@ public class RecipeView {
     // return toolbarPanel
     return toolbarPanel;
   }
-  
+
   /**
    * editView creates the view for editing recipes
    */
@@ -187,7 +186,6 @@ public class RecipeView {
         recipe.setIngredients(ingredientsTextPane.getText().split(","));
         recipe.setProcedure(procedureTextPane.getText().split(","));
         saveRecipe(recipe);
-        
         dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
       }
     });

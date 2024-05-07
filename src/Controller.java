@@ -9,6 +9,8 @@ public class Controller {
   public static RecipeManager recipeManager = new RecipeManager();
   private static JFrame frame = new JFrame();
   private static JPanel homePanel = new JPanel();
+  private static DefaultListModel<String> listModel = new DefaultListModel<>();
+  private static ArrayList<Recipe> recipes = recipeManager.getRecipes();
   
   public static void main(String[] args) {
     
@@ -78,20 +80,14 @@ public class Controller {
    * @return JList
    */
   public static JList<String> recipesList() {
-    DefaultListModel<String> listModel = new DefaultListModel<>();
-    ArrayList<Recipe> recipes = recipeManager.getRecipes();
-    if (recipes.size() > 0) {
-      for (Recipe item : recipes) {
-        listModel.addElement(item.getRecipeName());
-      }
-    }
+    // call getListModel on render
+    getListModel();
+    // create JList element with model from the getListModel method
     JList<String> jlist = new JList<>(listModel);
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
           int index = jlist.locationToIndex(e.getPoint());
-          System.out.println("Double clicked on Item " + index);
-          System.out.println(recipes.get(index).getRecipeName());
           // open the detailsView
           JPanel details = RecipeView.detailsView(recipes.get(index));
           changePanel(details);
@@ -102,6 +98,18 @@ public class Controller {
     return jlist;
   }
 
+  /**
+   * Gets list model to display in jlist on main page
+   * @return DefaultListModel<String> 
+   */
+  public static void getListModel() {
+    // add the elements from the recipes list to the model
+    if (recipes.size() > 0) {
+      for (Recipe item : recipes) {
+        listModel.addElement(item.getRecipeName());
+      }
+    }
+  }
   /**
    * Method changes current panel to panel passed as parameter
    * @param newPanel
@@ -122,5 +130,15 @@ public class Controller {
     frame.getContentPane().add(homePanel);
     frame.getContentPane().doLayout();
     frame.update(frame.getGraphics());
+
+    getListModel();
+    
+  }
+
+  /**
+   * Static method to allow parts of the app to delete a recipe
+   */
+  public static void deleteRecipe(Recipe recipe) {
+    recipeManager.deleteRecipe(recipe);
   }
 }

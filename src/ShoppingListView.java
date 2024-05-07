@@ -2,6 +2,10 @@ package src;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class ShoppingListView {
   /**
@@ -58,6 +62,7 @@ public class ShoppingListView {
      * TO DO: Add content pane to show shopping list details
      */
     // create recipeList
+
     JList recipeList = new JList(ShoppingList.getRecipeList().toArray());
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
@@ -68,9 +73,48 @@ public class ShoppingListView {
       }
     };
     recipeList.addMouseListener(mouseListener);
-    panel.add(recipeList, BorderLayout.CENTER);
+
+    panel.add(shoppingListDetails(), BorderLayout.CENTER);
     return panel;
   }
+
+  public static JScrollPane shoppingListDetails() {
+    // initialize shoppingListRecipes
+    Recipe[] shoppingListRecipes = new Recipe[ShoppingList.getRecipeList().size()];
+
+    // get items on shopping list
+    shoppingListRecipes = ShoppingList.getRecipeList().toArray(shoppingListRecipes);
+
+    // create textPane to display recipe details
+    JTextPane textPane = new JTextPane(); 
+
+    // Create a custom StyledDocument to display in textPane 
+    StyledDocument doc = textPane.getStyledDocument(); 
+
+    // create styling for doc
+    Style normal = doc.addStyle("customStyle", null); 
+
+    // insert text into document
+    try {
+      for (Recipe recipe : shoppingListRecipes) {
+        String[] ingredienstList = recipe.getIngredients();
+        for (int i = 0; i < ingredienstList.length; i++) {
+          doc.insertString(i, ingredienstList[i] + "\n", normal);
+        }
+        doc.insertString(0, "\n" + recipe.getRecipeName(), normal);
+      }
+    } 
+    catch (BadLocationException e) { 
+      e.printStackTrace(); 
+    } 
+
+    // Set the StyledDocument for textPane
+    textPane.setStyledDocument(doc); 
+    // add TextPane to scrollArea
+    JScrollPane scrollArea = new JScrollPane(textPane);
+    return scrollArea;
+}
+
   /**
    * editShoppingListView method opens the view to edit the shopping list
    */
