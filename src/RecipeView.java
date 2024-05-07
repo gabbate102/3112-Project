@@ -55,9 +55,16 @@ public class RecipeView {
 
     return panel;
   }
-  private static JToolBar detailsToolBar(Recipe recipe) {
+  /**
+   * Creates the toolbar for the details view
+   * @param recipe
+   * @return JPanel
+   */
+  private static JPanel detailsToolBar(Recipe recipe) {
+    // create toolbarPanel
     JPanel toolbarPanel = new JPanel();
-    JToolBar toolbar = new JToolBar();
+    
+    // create buttons for the toolbar
     JButton backButton =  new JButton("Back");
     JButton addToShoppingListButton = new JButton("+ Add to Shopping List");
     JButton editButton = new JButton("Edit");
@@ -88,14 +95,16 @@ public class RecipeView {
       }
     });
 
+    // add the buttons to the toolbar
     toolbarPanel.add(backButton);
     toolbarPanel.add(addToShoppingListButton);
     toolbarPanel.add(editButton);
     toolbarPanel.add(deleteButton);
-    toolbar.add(toolbarPanel);
 
-    return toolbar;
+    // return toolbarPanel
+    return toolbarPanel;
   }
+  
   /**
    * editView creates the view for editing recipes
    */

@@ -13,7 +13,10 @@ public class ShoppingListView {
 
     // create toolbar
     JPanel buttonPanel = new JPanel();
+
+    // create back button
     JButton backButton = new JButton("Back");
+    // add event listener to button 
     backButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         // call goToHomePanel to direct user to home
@@ -21,14 +24,20 @@ public class ShoppingListView {
         System.out.println("backButton Pressed.");
       }
     });
+    
+    // create edit button
     JButton editButton = new JButton("Edit");
+    // add event listener to button
     editButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         editShoppingListView();
         System.out.println("editButton Pressed.");
       }
     });
+
+    // create clear button
     JButton clearButton = new JButton("Clear");
+    // add event listener to button
     clearButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         // Call clearList from shopping list to clear the list
@@ -36,6 +45,7 @@ public class ShoppingListView {
         System.out.println("clearButton Pressed.");
       }
     });
+
     // Add buttons to buttonPanel
     buttonPanel.add(backButton);
     buttonPanel.add(editButton);
@@ -47,8 +57,7 @@ public class ShoppingListView {
     /*
      * TO DO: Add content pane to show shopping list details
      */
-    // create recipeList to display contents of shopping list
-    // by converting ArrayList<Recipe> shoppingList into an array
+    // create recipeList
     JList recipeList = new JList(ShoppingList.getRecipeList().toArray());
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
