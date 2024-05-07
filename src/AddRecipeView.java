@@ -1,5 +1,6 @@
 package src;
 import java.awt.event.*;
+import java.io.IOException;
 import java.awt.*;
 import javax.swing.*;
 
@@ -28,6 +29,13 @@ public class AddRecipeView {
       public void actionPerformed(ActionEvent e) {
         // get the text of the field
         System.out.println(textField.getText());
+        String url = textField.getText();
+        try {
+          RecipeParse.parseRecipe(url);
+        } catch (IOException e1) {
+          // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }
         // set the text of field to blank
         textField.setText(" ");
       }

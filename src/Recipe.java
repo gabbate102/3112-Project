@@ -107,7 +107,7 @@ public class Recipe implements Serializable{
    * setter method for ingredients
    * @return void
    */
-  public void setIngredients(String[]  ingredients) {
+  public void setIngredients(String[] ingredients) {
     this.ingredients = ingredients;
   }
   public String getIngredientsString() {
