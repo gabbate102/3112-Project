@@ -77,15 +77,15 @@ public class Controller {
    * This method returns a panel with the main list of recipes.
    * @return JList
    */
-  public static JList<Recipe> recipesList() {
-    DefaultListModel<Recipe> listModel = new DefaultListModel<>();
+  public static JList<String> recipesList() {
+    DefaultListModel<String> listModel = new DefaultListModel<>();
     ArrayList<Recipe> recipes = recipeManager.getRecipes();
     if (recipes.size() > 0) {
       for (Recipe item : recipes) {
-        listModel.addElement(item);
+        listModel.addElement(item.getRecipeName());
       }
     }
-    JList<Recipe> jlist = new JList<>(listModel);
+    JList<String> jlist = new JList<>(listModel);
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {

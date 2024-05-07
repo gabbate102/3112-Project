@@ -21,7 +21,7 @@ public class RecipeParse {
    * @throws IOException 
    */
   public static Recipe parseRecipe(String url) throws IOException {
-    
+
     Recipe recipe = new Recipe();
     recipe.setURL(url);
 
@@ -42,7 +42,8 @@ public class RecipeParse {
       System.out.println(recipeName.text());
       recipe.setRecipeName(recipeName.text());
 
-      // get recipeIngredients
+      // Get the Ingredients  ----------
+      // get the ingredients section of the site
       ArrayList<String> ingredientsArrayList = new ArrayList<String>();
       Elements siteIngredientsSection = doc.getElementsByClass("wprm-recipe-ingredient-group");
 
@@ -51,7 +52,7 @@ public class RecipeParse {
 
         // get the section name
         Elements siteSectionName = item.getElementsByClass("wprm-recipe-group-name");
-        ingredientsArrayList.add("Section: " + siteSectionName);
+        ingredientsArrayList.add("Section: " + siteSectionName.text());
 
         // get the ingredient list
 
@@ -70,6 +71,30 @@ public class RecipeParse {
 
       // set the ingredients property of the recipe
       recipe.setIngredients(ingredientsList);
+
+      // Get the Procedure ----------
+
+      ArrayList<String> procedureArrayList = new ArrayList<String>();
+      // get the siteProcedureSections
+      Elements siteProcedureSections = doc.getElementsByClass("wprm-recipe-instructions");
+
+      // for each section, get the list items
+      for (Element section : siteProcedureSections) {
+
+        Elements listItems = section.getElementsByTag("li");
+
+        // for each list item, add the text to procedureArrayList
+        for (Element li : listItems) {
+          procedureArrayList.add(li.text());
+        }
+      }
+
+      // convert the arraylist to an array
+      String[] procedureList = new String[procedureArrayList.size()];
+      procedureList = procedureArrayList.toArray(procedureList);
+
+      // set the procedure property of the recipe
+      recipe.setProcedure(procedureList);
     }
     
     return recipe;

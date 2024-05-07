@@ -31,7 +31,8 @@ public class AddRecipeView {
         System.out.println(textField.getText());
         String url = textField.getText();
         try {
-          RecipeParse.parseRecipe(url);
+          Recipe newRecipe = RecipeParse.parseRecipe(url);
+          RecipeView.editView(newRecipe);
         } catch (IOException e1) {
           // TODO Auto-generated catch block
           e1.printStackTrace();
