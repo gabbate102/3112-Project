@@ -31,7 +31,6 @@ public class RecipeParse {
     // Check for WordPress Recipe Maker parsing
     // Get the recipe block
     Elements recipeBlock = doc.getElementsByClass("wprm-recipe");
-
     // Check if recipeBlock is empty, return an empty recipe if it is
     if (recipeBlock.toString().length() > 1) {
       // call wprmParse
