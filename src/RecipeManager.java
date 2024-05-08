@@ -47,7 +47,7 @@ public class RecipeManager {
       e.printStackTrace();
       return;
     } catch (ClassNotFoundException c) {
-      System.out.println("Employee class not found");
+      System.out.println("");
       c.printStackTrace();
       return;
     }
