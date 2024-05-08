@@ -11,7 +11,6 @@ import javax.swing.*;
 public class SearchView {
   private static ArrayList<Recipe> searchResults = new ArrayList<Recipe>();
   private static DefaultListModel<String> listModel;
-  private static JPanel searchPanel = new JPanel();
 
   /**
    * Creates search view
@@ -19,6 +18,7 @@ public class SearchView {
    * @return JPanel
    */
   public static JPanel searchView() {
+    JPanel searchPanel = new JPanel();
     // set searchPanel layout to borderLayout
     searchPanel.setLayout(new BorderLayout());
 
@@ -27,9 +27,11 @@ public class SearchView {
 
     // create searchField
     JTextField searchField = new JTextField(18);
+    searchField.setToolTipText("Search by Name or enter ingredients seperated by commas");
 
     // create backButton
     JButton backButton = new JButton("Back");
+    backButton.setToolTipText("Go back to start page");
 
     // add actionlistener to backButton 
     backButton.addActionListener(new ActionListener() {
@@ -54,8 +56,14 @@ public class SearchView {
         // set the text of field to blank
         searchField.setText(" ");
 
-        // call the searchByName method 
-        searchResults = Controller.recipeManager.searchByName(query);
+        // check if query is csv format
+        if (query.contains(",")) {
+          // if it is, search by ingredient 
+          searchResults = Controller.recipeManager.searchByIngredient(query.split(","));
+        } else {
+          // call the searchByName method 
+          searchResults = Controller.recipeManager.searchByName(query);
+        }
 
         // call getListModel to refresh list
         getListModel();
@@ -64,20 +72,9 @@ public class SearchView {
         reloadPanel();
       }
     });
-
-    // create filter button
-    JButton filterButton = new JButton("Filter");
-
-    // add actionlistener to filterButton 
-    filterButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        System.out.println("filterButton Pressed.");
-      }
-    });
     
     // add elements to toolBar
     toolBar.add(backButton);
-    toolBar.add(filterButton);
     toolBar.add(searchField);
     toolBar.add(searchButton);
 

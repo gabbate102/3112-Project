@@ -176,23 +176,30 @@ public class RecipeManager {
    * @param ingredients
    * @return ArrayList<Recipe>
    */
-/*   public ArrayList<Recipe> searchByIngredient(String[] ingredients) {
-    ArrayList<Recipe> searchResults = new ArrayList();
+  public ArrayList<Recipe> searchByIngredient(String[] ingredients) {
+    ArrayList<Recipe> searchResults = new ArrayList<Recipe>();
 
-    for (int i = 0; i < recipes.size(); i++) {
-      ArrayList<String[]> tempIngredientList = recipes.get(i).getIngredients();
-      // for each ingredient in ingredients list, determine if it is in tempIngredientList
-      boolean containsItem = false;
-      for (int j=0; j < ingredients.length; j++) {
-        if (tempIngredientList.contains(ingredients[j])) {
-          containsItem = true;
-        } else {
-          containsItem = false;
+    // iterate through all recipes 
+    for (Recipe item : recipes) {
+      // iterate through all ingredients in the ingredients list
+      for (String queryIngredient : ingredients) {
+        // get the item's ingredients 
+        String[] itemIngredients = item.getIngredients();
+        // iterate through the ingredients 
+        for (String itemIngredient : itemIngredients) {
+          // check if itemIngredient contains queryIngredient
+          if (itemIngredient.toLowerCase().contains(queryIngredient.toLowerCase().strip())) {
+            if (!searchResults.contains(item)) {
+              searchResults.add(item);
+            }
+          }
         }
       }
     }
+
     return searchResults;
-  } */
+  }
+
 
   /**
    * searchByName method searches all recipes for a match to name
@@ -203,9 +210,9 @@ public class RecipeManager {
     // create arraylist for searchresults
     ArrayList<Recipe> searchResults = new ArrayList<Recipe>();
 
-    // for each element in recipes, if the name matches name, add to searchResults
+    // for each element in recipes, if the name contains name, add to searchResults
     for (int i = 0; i < recipes.size(); i++) {
-      if (recipes.get(i).getRecipeName().equals(name)) {
+      if (recipes.get(i).getRecipeName().toLowerCase().contains(name.strip().toLowerCase())) {
         searchResults.add(recipes.get(i));
       }
     }

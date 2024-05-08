@@ -23,6 +23,7 @@ public class ShoppingListView {
 
     // create back button
     JButton backButton = new JButton("Back");
+    backButton.setToolTipText("Go back to start page");
     // add event listener to button 
     backButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -34,6 +35,7 @@ public class ShoppingListView {
     
     // create edit button
     JButton editButton = new JButton("Edit");
+    editButton.setToolTipText("Edit your shopping list");
     // add event listener to button
     editButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -44,6 +46,7 @@ public class ShoppingListView {
 
     // create clear button
     JButton clearButton = new JButton("Clear");
+    clearButton.setToolTipText("Clear your shopping list");
     // add event listener to button
     clearButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -181,6 +184,7 @@ public class ShoppingListView {
 
     // create delete button and add actionListener
     JButton deleteButton = new JButton("Delete");
+    
     deleteButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("deleteButton Pressed.");
