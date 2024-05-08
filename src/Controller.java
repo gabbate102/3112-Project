@@ -105,7 +105,7 @@ public class Controller {
    * This method returns a panel with the main list of recipes.
    * @return JList
    */
-  public static JList<String> recipesList() {
+  public static JScrollPane recipesList() {
     // call getListModel on render
     getListModel();
 
@@ -126,8 +126,11 @@ public class Controller {
     // add mouseListener to jList
     jlist.addMouseListener(mouseListener);
 
+    // add jlist to JScrollPane
+    JScrollPane scrollPane = new JScrollPane(jlist);
+
     // return jList
-    return jlist;
+    return scrollPane;
   }
 
   /**

@@ -95,8 +95,11 @@ public class SearchView {
     };
     recipeList.addMouseListener(mouseListener);
 
-    // add recipeList to searchPanel
-    searchPanel.add(recipeList, BorderLayout.CENTER);
+    // add recipeList to a scrollPane
+    JScrollPane scrollPane = new JScrollPane(recipeList);
+
+    // add scrollPane to searchPanel
+    searchPanel.add(scrollPane, BorderLayout.CENTER);
 
     // add toolbar to searchPanel
     searchPanel.add(toolBar, BorderLayout.NORTH);
