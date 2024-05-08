@@ -178,4 +178,9 @@ public class Controller {
   public static void deleteRecipe(Recipe recipe) {
     recipeManager.deleteRecipe(recipe);
   }
+
+  public static void reload() {
+    frame.revalidate();
+    frame.repaint();
+  }
 }

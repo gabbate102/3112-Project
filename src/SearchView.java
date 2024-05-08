@@ -11,6 +11,7 @@ import javax.swing.*;
 public class SearchView {
   private static ArrayList<Recipe> searchResults = new ArrayList<Recipe>();
   private static DefaultListModel<String> listModel;
+  private static JPanel searchPanel = new JPanel();
 
   /**
    * Creates search view
@@ -18,8 +19,7 @@ public class SearchView {
    * @return JPanel
    */
   public static JPanel searchView() {
-    // create searchPanel and set layout to borderLayout
-    JPanel searchPanel = new JPanel();
+    // set searchPanel layout to borderLayout
     searchPanel.setLayout(new BorderLayout());
 
     // create toolBar
@@ -59,6 +59,9 @@ public class SearchView {
 
         // call getListModel to refresh list
         getListModel();
+
+        // call reloadPanel to reload panel 
+        reloadPanel();
       }
     });
 
@@ -120,5 +123,13 @@ public class SearchView {
         listModel.addElement(item.getRecipeName());
       }
     }
+  }
+
+  /**
+   * refreshes the results list by recreating the searchView
+   */
+  private static void reloadPanel() {
+    System.out.println("reloadPanel called.");
+    Controller.changePanel(searchView());
   }
 }

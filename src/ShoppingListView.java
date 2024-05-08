@@ -2,6 +2,7 @@ package src;
 
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.ResourceBundle.Control;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -185,6 +186,8 @@ public class ShoppingListView {
         System.out.println("deleteButton Pressed.");
         int selectedIndex = recipeList.getSelectedIndex();
         ShoppingList.removeRecipe(selectedIndex);
+
+        reloadPanel();
       }
     });
 
@@ -203,5 +206,9 @@ public class ShoppingListView {
 
     // set dialog to visible 
     dialog.setVisible(true);
+  }
+
+  private static void reloadPanel() {
+    Controller.changePanel(shoppingListView());
   }
 }
