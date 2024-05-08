@@ -138,9 +138,11 @@ public class RecipeView {
     // Create text pane for recipe ingredients
     JEditorPane ingredientsTextPane = new JEditorPane();
     ingredientsTextPane.setText(recipe.getIngredientsString());
+    JScrollPane ingredientsScrollPane = new JScrollPane(ingredientsTextPane);
     // Create text field for recipe procedure
     JEditorPane procedureTextPane = new JEditorPane();
     procedureTextPane.setText(recipe.getProcedureString());
+    JScrollPane procedureScrollPane = new JScrollPane(procedureTextPane);
 
     // add labels to labelPanel
     labelPanel.add(nameLabel);
@@ -153,8 +155,8 @@ public class RecipeView {
     editPanel.add(nameTextField);
     editPanel.add(authorTextField);
     editPanel.add(urlTextField);
-    editPanel.add(ingredientsTextPane);
-    editPanel.add(procedureTextPane);
+    editPanel.add(ingredientsScrollPane);
+    editPanel.add(procedureScrollPane);
 
     // add edit panel to panel
     panel.add(labelPanel, BorderLayout.WEST);

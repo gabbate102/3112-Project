@@ -9,7 +9,7 @@ public class Controller {
   public static RecipeManager recipeManager = new RecipeManager();
   private static JFrame frame = new JFrame();
   private static JPanel homePanel = new JPanel();
-  private static DefaultListModel<String> listModel = new DefaultListModel<>();
+  private static DefaultListModel<String> listModel;
   private static ArrayList<Recipe> recipes = recipeManager.getRecipes();
   
   public static void main(String[] args) {
@@ -103,6 +103,7 @@ public class Controller {
    * @return DefaultListModel<String> 
    */
   public static void getListModel() {
+    listModel = new DefaultListModel<>();
     // add the elements from the recipes list to the model
     if (recipes.size() > 0) {
       for (Recipe item : recipes) {

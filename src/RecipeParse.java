@@ -59,10 +59,11 @@ public class RecipeParse {
         Elements siteIngredientList = item.getElementsByTag("ul");
         // iterate over the ingredient list
         for (Element ingredient : siteIngredientList) {
-          System.out.println(ingredient.text());
+          String currentIngredient = ingredient.text().replace(",", " ") + ",";
+          System.out.println(currentIngredient);
 
           // add the ingredient to ingredientsArrayList
-          ingredientsArrayList.add(ingredient.text());
+          ingredientsArrayList.add(currentIngredient);
         }
       }
       // convert the arraylist to an array
