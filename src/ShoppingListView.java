@@ -1,11 +1,11 @@
 package src;
+
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 public class ShoppingListView {
@@ -13,7 +13,7 @@ public class ShoppingListView {
    * shoppingListView method shows the user's shopping list 
    */
   public static JPanel shoppingListView() {
-
+    // create panel
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());
 
@@ -63,9 +63,10 @@ public class ShoppingListView {
     /*
      * TO DO: Add content pane to show shopping list details
      */
-    // create recipeList
 
+    // create recipeList
     JList recipeList = new JList(ShoppingList.getRecipeList().toArray());
+    // add mouseListener to list elements
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
@@ -76,10 +77,16 @@ public class ShoppingListView {
     };
     recipeList.addMouseListener(mouseListener);
 
+    // add shoppingListDetails to panel
     panel.add(shoppingListDetails(), BorderLayout.CENTER);
+
     return panel;
   }
 
+  /**
+   * Creates JScrollPane containing formatted details of shopping list
+   * @return
+   */
   public static JScrollPane shoppingListDetails() {
     // initialize shoppingListRecipes
     Recipe[] shoppingListRecipes = new Recipe[ShoppingList.getRecipeList().size()];
@@ -117,14 +124,18 @@ public class ShoppingListView {
     textPane.setStyledDocument(doc); 
     // add TextPane to scrollArea
     JScrollPane scrollArea = new JScrollPane(textPane);
+    
     return scrollArea;
-}
+  }
 
   /**
    * editShoppingListView method opens the view to edit the shopping list
    */
   public static void editShoppingListView() {
+    // create dialog 
     JDialog dialog = new JDialog();
+
+    // create panel and set layout to borderlayout
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());
     
@@ -150,11 +161,15 @@ public class ShoppingListView {
       }
     };
     recipeList.addMouseListener(mouseListener);
+
+    // add recipeList to panel
     panel.add(recipeList, BorderLayout.CENTER);
 
     // create panel for buttons 
     JPanel buttonPanel = new JPanel();
     buttonPanel.setLayout(new BorderLayout());
+
+    // create cancelButton and add actionListener
     JButton cancelButton = new JButton("Cancel");
     cancelButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -162,6 +177,8 @@ public class ShoppingListView {
         dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
       }
     });
+
+    // create delete button and add actionListener
     JButton deleteButton = new JButton("Delete");
     deleteButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -170,15 +187,20 @@ public class ShoppingListView {
         ShoppingList.removeRecipe(selectedIndex);
       }
     });
+
     // add the buttons to the buttonPanel
     buttonPanel.add(cancelButton, BorderLayout.WEST);
     buttonPanel.add(deleteButton, BorderLayout.EAST);
+
     // add button panel to panel
     panel.add(buttonPanel, BorderLayout.SOUTH);
+
     // add panel to dialog
     dialog.add(panel);
+
     // set dialog size 
     dialog.setSize(400, 500);
+    
     // set dialog to visible 
     dialog.setVisible(true);
   }

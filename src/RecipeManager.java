@@ -1,4 +1,5 @@
 package src;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.FileOutputStream;
@@ -7,9 +8,14 @@ import java.io.FileInputStream;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Class RecipeManager manages recipe objects and contains methods to interact with the 
+ * stored recipes.
+ */
 public class RecipeManager {
   private File recipeListFile = null;
   private ArrayList<Recipe> recipes = new ArrayList<>();
+  
   /**
    * Default constructor
    */
@@ -17,11 +23,13 @@ public class RecipeManager {
     this.loadFile();
     this.readRecipes();
   }
+  
   /**
    * loadFile method loads the recipeListFile and creates it if it does not exist
    */
   private void loadFile() {
     this.recipeListFile = new File("recipeListFile");
+
     try {
       if (this.recipeListFile.createNewFile()) {
         System.out.println("File created: " + this.recipeListFile.getName());
@@ -33,6 +41,7 @@ public class RecipeManager {
       return;
     }
   }
+
   /**
    * readRecipes method reads the recipes from recipeListFile
    */
@@ -52,6 +61,7 @@ public class RecipeManager {
       return;
     }
   }
+
     /**
    * writeRecipes method writes recipes to the recipeListFile
    */
@@ -67,9 +77,11 @@ public class RecipeManager {
       return;
     }
   }
+
   public ArrayList<Recipe> getRecipes() {
     return this.recipes;
   }
+
   /**
    * addRecipe method appends a new recipe to recipes arraylist
    * @param newRecipe
@@ -82,9 +94,11 @@ public class RecipeManager {
       updateRecipe(newRecipe);
     } 
     this.recipes.add(newRecipe);
+
     // update recipes file
     this.writeRecipes();
   }
+
   /**
    * updateRecipe method updates an existing recipe in recipes arrayList
    * @param updatedRecipe
@@ -92,16 +106,20 @@ public class RecipeManager {
    */
   public int updateRecipe(Recipe updatedRecipe) {
     int matchIndex = indexSearch(updatedRecipe);
+
     if (matchIndex != -1) {
       // put updatedRecipe at index matchIndex in recipes
       this.recipes.set(matchIndex, updatedRecipe);
+
       // update recipes file
       this.writeRecipes();
+
       return 0;
     } else {
       return -1;
     }
   }
+
   /**
    * deleteRecipe method deletes a given recipe
    * @param recipe
@@ -109,8 +127,10 @@ public class RecipeManager {
    */
   public int deleteRecipe(Recipe recipe) {
     int matchIndex = indexSearch(recipe);
+
     if (matchIndex != -1) {
       this.recipes.remove(matchIndex);
+
       // update recipes file
       this.writeRecipes();
       return 0;
@@ -118,6 +138,7 @@ public class RecipeManager {
       return -1;
     }
   }
+
   /**
    * indexSearch method searches recipes ArrayList for a match to queryRecipe and returns the 
    * matching index.
@@ -127,22 +148,28 @@ public class RecipeManager {
   private int indexSearch(Recipe queryRecipe) {
     int matchIndex = -1;
     int searchIndex = 0;
+
     // while match index equals -1
     while (matchIndex == -1) {
       // if search index is out of bounds then return 
       if (searchIndex >= this.recipes.size()) {
         return -1;
       }
+
       // retrieve the recipe from recipes at index searchIndex
       Recipe tempRecipe = this.recipes.get(searchIndex);
+
       // if recipeID matches then update matchIndex to the index of the matching recipe
       if (tempRecipe.getRecipeID() == queryRecipe.getRecipeID()) {
         matchIndex = searchIndex;
       }
+
       searchIndex++;
     }
+
     return matchIndex;
   }
+
   /** 
    * searchByIngredient method searches all recipes for recipes matching the ingredients
    * in the ingredients list. 
@@ -166,19 +193,23 @@ public class RecipeManager {
     }
     return searchResults;
   } */
+
   /**
    * searchByName method searches all recipes for a match to name
    * @param name
    * @return ArrayList<Recipe>
    */
   public ArrayList<Recipe> searchByName(String name) {
-    ArrayList<Recipe> searchResults = new ArrayList();
+    // create arraylist for searchresults
+    ArrayList<Recipe> searchResults = new ArrayList<Recipe>();
+
     // for each element in recipes, if the name matches name, add to searchResults
     for (int i = 0; i < recipes.size(); i++) {
       if (recipes.get(i).getRecipeName().equals(name)) {
         searchResults.add(recipes.get(i));
       }
     }
+
     return searchResults;
   }
 }

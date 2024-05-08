@@ -1,11 +1,10 @@
 package src;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
-
 import java.util.*;
-import java.util.List;
 
 public class Controller {
   public static RecipeManager recipeManager = new RecipeManager();
@@ -15,9 +14,12 @@ public class Controller {
   private static ArrayList<Recipe> recipes = recipeManager.getRecipes();
   
   public static void main(String[] args) {
+    // load the shoppingList file on application start
     ShoppingList.loadFile();
     
+    // set the default close operation 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     // set size
     frame.setBounds(300, 90, 900, 600);
 
@@ -38,10 +40,12 @@ public class Controller {
     JLabel welcomeMessage = new JLabel("Welcome to RecipeBook!\n");
     welcomePanel.add(welcomeMessage);
     welcomePanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-
+    // add welcome panel
     homePanel.add(welcomePanel, BorderLayout.WEST);
 
+    // add homePanel to frame
     frame.getContentPane().add(homePanel);
+    
     // making the frame visible
     frame.setVisible(true);
   }
@@ -53,12 +57,14 @@ public class Controller {
   public static JPanel mainToolBar() {
     // create toolbarpanel to hold toolbar elements
     JPanel toolbarPanel = new JPanel();
+
     // create newRecipeButton
     JButton newRecipeButton =  new JButton("Add Recipe");
     // create searchButton
     JButton searchButton = new JButton("Search");
     // create viewShoppingListButton
     JButton viewShoppingListButton = new JButton("Shopping List");
+
     // add actionlistener to newRecipeButton
     newRecipeButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -67,14 +73,16 @@ public class Controller {
         AddRecipeView.getUrlView();
       }
     });
+
     // add action listener to searchButton
     searchButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         // change panel to show searchView
-        Controller.changePanel(SearchView.searchView(recipeManager));
+        Controller.changePanel(SearchView.searchView());
         System.out.println("searchButton Pressed.");
       }
     });
+
     // add action listener to viewShoppingListButton
     viewShoppingListButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -83,10 +91,12 @@ public class Controller {
         System.out.println("viewShoppingListButton Pressed.");
       }
     });
+
     // add buttons to toolbarPanel
     toolbarPanel.add(newRecipeButton);
     toolbarPanel.add(viewShoppingListButton);
     toolbarPanel.add(searchButton);
+
     // return toolbarPanel
     return toolbarPanel;
   }
@@ -98,8 +108,10 @@ public class Controller {
   public static JList<String> recipesList() {
     // call getListModel on render
     getListModel();
+
     // create JList element with model from the getListModel method
     JList<String> jlist = new JList<>(listModel);
+
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
@@ -111,8 +123,10 @@ public class Controller {
       }
     };
 
+    // add mouseListener to jList
     jlist.addMouseListener(mouseListener);
 
+    // return jList
     return jlist;
   }
 
@@ -122,6 +136,7 @@ public class Controller {
    */
   public static void getListModel() {
     listModel = new DefaultListModel<>();
+
     // add the elements from the recipes list to the model
     if (recipes.size() > 0) {
       for (Recipe item : recipes) {
@@ -129,11 +144,12 @@ public class Controller {
       }
     }
   }
+
   /**
    * Method changes current panel to panel passed as parameter
    * @param newPanel
    */
-  private static void changePanel(JPanel newPanel) {
+  public static void changePanel(JPanel newPanel) {
     frame.getContentPane().removeAll();
     frame.getContentPane().add(newPanel);
     frame.getContentPane().doLayout();
@@ -151,7 +167,6 @@ public class Controller {
     frame.update(frame.getGraphics());
 
     getListModel();
-    
   }
 
   /**

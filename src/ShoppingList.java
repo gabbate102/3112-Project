@@ -1,4 +1,5 @@
 package src;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,6 +8,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * ShoppingList class is for the shopping list object
+ * and Contains methods to alter the shopping list
+ */
 public class ShoppingList {
   private static ArrayList<Recipe> recipeList = new ArrayList<>();
   private static File shoppingListFile = null;
@@ -16,6 +21,7 @@ public class ShoppingList {
    */
   public static void loadFile() {
     shoppingListFile = new File("shoppingListFile");
+
     try {
       if (shoppingListFile.createNewFile()) {
         System.out.println("File created: " + shoppingListFile.getName());
@@ -70,29 +76,42 @@ public class ShoppingList {
    */
   public static ArrayList<Recipe> getRecipeList() {
     readShoppingList();
+
     return recipeList; 
   }
+
   /**
    * Adds a recipe to the shopping list
    * @param recipe
    */
   public static void addRecipe(Recipe recipe) {
-    recipeList.add(recipe);
-    writeList();
+    // check if the recipe is already in the list
+    if (!recipeList.contains(recipe)) {
+      recipeList.add(recipe);
+      
+      // update the shoppingListFile
+      writeList();  
+    }
   }
+
   /** 
    * removes a recipe from the shopping list
    */
   public static void removeRecipe(int index){
     recipeList.remove(index);
     System.out.println(recipeList);
+    
+    // update the shoppingListFile
     writeList();
   }
+  
   /**
    * Clears the shopping list
    */
   public static void clearList(){
     recipeList.clear();
+
+    // update the shoppingListFile
     writeList();
   }
 }
