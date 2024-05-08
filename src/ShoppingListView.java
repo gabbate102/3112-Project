@@ -97,11 +97,14 @@ public class ShoppingListView {
     // insert text into document
     try {
       for (Recipe recipe : shoppingListRecipes) {
+
         String[] ingredienstList = recipe.getIngredients();
         for (int i = 0; i < ingredienstList.length; i++) {
           doc.insertString(i, ingredienstList[i] + "\n", normal);
         }
-        doc.insertString(0, "\n" + recipe.getRecipeName(), normal);
+        doc.insertString(0, "Ingredients: "+"\n", normal);
+        doc.insertString(0, recipe.getRecipeName()+"\n\n", normal);
+        doc.insertString(0, "\n---------------------------\n", normal);
       }
     } 
     catch (BadLocationException e) { 
