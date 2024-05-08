@@ -14,6 +14,7 @@ import java.io.IOException;
  */
 public class RecipeParse {
   private Dictionary<String, String[]> recipeFormatting;
+
   /**
    * parseRecipe takes a url and parses the data from the website to create a recipe object.
    * @param url
@@ -66,6 +67,7 @@ public class RecipeParse {
           ingredientsArrayList.add(currentIngredient);
         }
       }
+
       // convert the arraylist to an array
       String[] ingredientsList = new String[ingredientsArrayList.size()];
       ingredientsList = ingredientsArrayList.toArray(ingredientsList);
@@ -76,6 +78,7 @@ public class RecipeParse {
       // Get the Procedure ----------
 
       ArrayList<String> procedureArrayList = new ArrayList<String>();
+      
       // get the siteProcedureSections
       Elements siteProcedureSections = doc.getElementsByClass("wprm-recipe-instructions");
 

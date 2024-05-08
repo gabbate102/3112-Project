@@ -65,7 +65,7 @@ public class ShoppingListView {
      */
 
     // create recipeList
-    JList recipeList = new JList(ShoppingList.getRecipeList().toArray());
+    JList<Recipe> recipeList = new JList(ShoppingList.getRecipeList().toArray());
     // add mouseListener to list elements
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
@@ -200,7 +200,7 @@ public class ShoppingListView {
 
     // set dialog size 
     dialog.setSize(400, 500);
-    
+
     // set dialog to visible 
     dialog.setVisible(true);
   }
