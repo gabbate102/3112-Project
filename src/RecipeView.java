@@ -1,5 +1,5 @@
 package src;
-import java.util.*;
+
 import java.awt.event.*;
 import javax.swing.text.*;
 import java.awt.*;
@@ -95,7 +95,7 @@ public class RecipeView {
         AddRecipeView.editView(recipe);
       }
     });
-    
+
     deleteButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("deleteButton Pressed.");

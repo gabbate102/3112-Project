@@ -1,12 +1,11 @@
 package src;
+
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.*;
-
 import java.util.ArrayList;
 import java.util.Dictionary;
-
 import java.io.IOException;
 
 /**
@@ -78,7 +77,7 @@ public class RecipeParse {
       // Get the Procedure ----------
 
       ArrayList<String> procedureArrayList = new ArrayList<String>();
-      
+
       // get the siteProcedureSections
       Elements siteProcedureSections = doc.getElementsByClass("wprm-recipe-instructions");
 
