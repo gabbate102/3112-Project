@@ -1,5 +1,6 @@
 package src;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
@@ -12,6 +13,7 @@ public class ShoppingListView {
    * shoppingListView method shows the user's shopping list 
    */
   public static JPanel shoppingListView() {
+
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());
 
@@ -132,7 +134,13 @@ public class ShoppingListView {
 
     // create recipeList to display contents of shopping list
     // by converting ArrayList<Recipe> shoppingList into an array
-    JList recipeList = new JList(ShoppingList.getRecipeList().toArray());
+    ArrayList<Recipe> list = ShoppingList.getRecipeList();
+    String[] shoppingListArray = new String[list.size()];
+    for (int i = 0; i < shoppingListArray.length; i++) {
+      shoppingListArray[i] = list.get(i).getRecipeName();
+    }
+
+    JList<String> recipeList = new JList<String>(shoppingListArray);
     MouseListener mouseListener = new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
@@ -158,6 +166,8 @@ public class ShoppingListView {
     deleteButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         System.out.println("deleteButton Pressed.");
+        int selectedIndex = recipeList.getSelectedIndex();
+        ShoppingList.removeRecipe(selectedIndex);
       }
     });
     // add the buttons to the buttonPanel

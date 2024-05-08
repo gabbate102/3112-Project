@@ -14,7 +14,7 @@ public class ShoppingList {
   /**
    * Loads the shopping list file
    */
-  private static void loadFile() {
+  public static void loadFile() {
     shoppingListFile = new File("shoppingListFile");
     try {
       if (shoppingListFile.createNewFile()) {
@@ -31,7 +31,7 @@ public class ShoppingList {
   /**
    * Reads the shopping list file
    */
-  private static void readShoppingList() {
+  public static void readShoppingList() {
     try {
       FileInputStream fileIn = new FileInputStream(shoppingListFile);
       ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -51,11 +51,11 @@ public class ShoppingList {
   /** 
    * Writes the shopping list to a file
    */
-  private static void writeList() {
+  public static void writeList() {
     try {
       FileOutputStream fileOut = new FileOutputStream(shoppingListFile);
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
-      out.writeObject( recipeList);
+      out.writeObject(recipeList);
       out.close();
       fileOut.close();
     } catch (IOException e) {
@@ -69,7 +69,6 @@ public class ShoppingList {
    * @return ArrayList<Recipe>
    */
   public static ArrayList<Recipe> getRecipeList() {
-    loadFile();
     readShoppingList();
     return recipeList; 
   }
@@ -84,8 +83,9 @@ public class ShoppingList {
   /** 
    * removes a recipe from the shopping list
    */
-  public static void removeRecipe(Recipe recipe){
-    recipeList.remove(recipe);
+  public static void removeRecipe(int index){
+    recipeList.remove(index);
+    System.out.println(recipeList);
     writeList();
   }
   /**

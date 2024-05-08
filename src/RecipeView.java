@@ -103,55 +103,61 @@ public class RecipeView {
     // return toolbarPanel
     return toolbarPanel;
   }
-
   /**
    * editView creates the view for editing recipes
    */
   public static void editView(Recipe recipe) {
     JDialog dialog = new JDialog();
-    JPanel panel = new JPanel();
-    JPanel labelPanel = new JPanel();
-    panel.setLayout(new BorderLayout());
-    labelPanel.setLayout(new GridLayout(5,1));
     
+    // set dialog size
+    dialog.setBounds(300, 90, 900, 600);
 
-    // Create JLabel element for nameTextField
-    JLabel nameLabel = new JLabel("Name", SwingConstants.RIGHT);
-    // Create JLabel element for authorTextField
-    JLabel authorLabel = new JLabel("Author", SwingConstants.RIGHT);
-    // Create JLabel element for urlTextField
-    JLabel urlLabel = new JLabel("URL", SwingConstants.RIGHT);
-    // Create JLabel element for ingredientsTextPane
-    JLabel ingredientsLabel = new JLabel("Ingredients", SwingConstants.RIGHT);
-    // Create JLabel element for procedureTextPane
-    JLabel procedureLabel = new JLabel("Procedure", SwingConstants.RIGHT);
+    // set dialog as not resizable 
+    dialog.setResizable(false);
+
+
+    // create new panel
+    JPanel panel = new JPanel();
+    panel.setLayout(new BorderLayout());    
+
 
     // Create edit panel to hold editing panes together 
     JPanel editPanel = new JPanel();
-    editPanel.setLayout(new GridLayout(5,1));
+    //editPanel.setLayout(new GridLayout(5,2));
+
     // Create text field for recipe name
     JTextField nameTextField = new JTextField(recipe.getRecipeName());
+    nameTextField.setColumns(24);
+    nameTextField.setBorder(
+      BorderFactory.createTitledBorder("Recipe Title"));
+
     // Create text field for recipe author
     JTextField authorTextField = new JTextField(recipe.getAuthor());
+    authorTextField.setColumns(24);
+    authorTextField.setBorder(
+      BorderFactory.createTitledBorder("Author"));
+
     // Create text field for recipe URL
     JTextField urlTextField = new JTextField(recipe.getRecipeURL());
+    urlTextField.setColumns(24);
+    urlTextField.setBorder(
+      BorderFactory.createTitledBorder("URL"));
+
     // Create text pane for recipe ingredients
     JEditorPane ingredientsTextPane = new JEditorPane();
     ingredientsTextPane.setText(recipe.getIngredientsString());
     JScrollPane ingredientsScrollPane = new JScrollPane(ingredientsTextPane);
+    ingredientsScrollPane.setBorder(
+      BorderFactory.createTitledBorder("Ingredients"));
+
     // Create text field for recipe procedure
     JEditorPane procedureTextPane = new JEditorPane();
     procedureTextPane.setText(recipe.getProcedureString());
     JScrollPane procedureScrollPane = new JScrollPane(procedureTextPane);
+    procedureScrollPane.setBorder(
+      BorderFactory.createTitledBorder("Procedure"));
 
     // add labels to labelPanel
-    labelPanel.add(nameLabel);
-    labelPanel.add(authorLabel);
-    labelPanel.add(urlLabel);
-    labelPanel.add(ingredientsLabel);
-    labelPanel.add(procedureLabel);
-
-    // Add text fields to edit panel 
     editPanel.add(nameTextField);
     editPanel.add(authorTextField);
     editPanel.add(urlTextField);
@@ -159,8 +165,7 @@ public class RecipeView {
     editPanel.add(procedureScrollPane);
 
     // add edit panel to panel
-    panel.add(labelPanel, BorderLayout.WEST);
-    panel.add(editPanel, BorderLayout.EAST);
+    panel.add(editPanel, BorderLayout.CENTER);
 
     // Create button panel to hold buttons 
     JPanel buttonPanel = new JPanel();
@@ -200,7 +205,7 @@ public class RecipeView {
     // add panel to dialog
     dialog.add(panel);
     // set dialog size 
-    dialog.setSize(400, 500);
+    // dialog.setSize(400, 500);
     // set dialog to visible p
     dialog.setVisible(true);
   }

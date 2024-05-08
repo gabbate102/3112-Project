@@ -2,6 +2,8 @@ package src;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+
 import java.util.*;
 import java.util.List;
 
@@ -13,17 +15,31 @@ public class Controller {
   private static ArrayList<Recipe> recipes = recipeManager.getRecipes();
   
   public static void main(String[] args) {
+    ShoppingList.loadFile();
     
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    // 400 width and 500 height
-    frame.setSize(500, 600);
+    // set size
+    frame.setBounds(300, 90, 900, 600);
 
+    // set title 
+    frame.setTitle("RecipeBook");
+    
+    // set a border for the panel
+    homePanel.setBorder(BorderFactory.createEmptyBorder(0,30,30,30));
     // create homePanel to display the start page of the app 
     homePanel.setLayout(new BorderLayout());
     // add toolbar
     homePanel.add(mainToolBar(), BorderLayout.NORTH);
     // add recipes list
     homePanel.add(recipesList(), BorderLayout.CENTER);
+
+    // create welcome message panel
+    JPanel welcomePanel = new JPanel();
+    JLabel welcomeMessage = new JLabel("Welcome to RecipeBook!\n");
+    welcomePanel.add(welcomeMessage);
+    welcomePanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+
+    homePanel.add(welcomePanel, BorderLayout.WEST);
 
     frame.getContentPane().add(homePanel);
     // making the frame visible
@@ -94,7 +110,9 @@ public class Controller {
         }
       }
     };
+
     jlist.addMouseListener(mouseListener);
+
     return jlist;
   }
 
