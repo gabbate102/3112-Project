@@ -9,7 +9,6 @@ import java.util.*;
 public class Controller {
   public static RecipeManager recipeManager = new RecipeManager();
   private static JFrame frame = new JFrame();
-  private static JPanel homePanel = new JPanel();
   private static DefaultListModel<String> listModel;
   private static ArrayList<Recipe> recipes = recipeManager.getRecipes();
   
@@ -25,7 +24,16 @@ public class Controller {
 
     // set title 
     frame.setTitle("RecipeBook");
+
+    // add homePanel to frame
+    frame.getContentPane().add(homePage());
     
+    // making the frame visible
+    frame.setVisible(true);
+  }
+
+  public static JPanel homePage() {
+    JPanel homePanel = new JPanel();
     // set a border for the panel
     homePanel.setBorder(BorderFactory.createEmptyBorder(0,30,30,30));
     // create homePanel to display the start page of the app 
@@ -43,11 +51,7 @@ public class Controller {
     // add welcome panel
     homePanel.add(welcomePanel, BorderLayout.WEST);
 
-    // add homePanel to frame
-    frame.getContentPane().add(homePanel);
-    
-    // making the frame visible
-    frame.setVisible(true);
+    return homePanel;
   }
 
   /**
@@ -168,9 +172,10 @@ public class Controller {
    */
   public static void goToHomePanel() {
     frame.getContentPane().removeAll();
-    frame.getContentPane().add(homePanel);
+    frame.getContentPane().add(homePage());
     frame.getContentPane().doLayout();
     frame.update(frame.getGraphics());
+    frame.revalidate();
 
     getListModel();
   }
@@ -183,7 +188,6 @@ public class Controller {
   }
 
   public static void reload() {
-    frame.revalidate();
-    frame.repaint();
+    Controller.changePanel(homePage());
   }
 }

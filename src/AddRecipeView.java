@@ -176,6 +176,8 @@ public class AddRecipeView {
         recipe.setIngredients(ingredientsTextPane.getText().split(","));
         recipe.setProcedure(procedureTextPane.getText().split(","));
         saveRecipe(recipe);
+        Controller.reload();
+        
         dialog.dispatchEvent(new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
       }
     });

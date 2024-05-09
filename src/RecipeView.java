@@ -100,6 +100,7 @@ public class RecipeView {
       public void actionPerformed(ActionEvent e) {
         System.out.println("deleteButton Pressed.");
         Controller.deleteRecipe(recipe);
+        Controller.reload();
         Controller.goToHomePanel();
       }
     });
