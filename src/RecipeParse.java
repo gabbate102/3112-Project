@@ -28,6 +28,10 @@ public class RecipeParse {
     // downloading the target website with an HTTP GET request
     Document doc = Jsoup.connect(url).get();
     
+    if (url.contains("allrecipes")) { 
+      recipe = allrecipesParse(doc, recipe);
+    }
+
     // Check for WordPress Recipe Maker parsing
     // Get the recipe block
     Elements recipeBlock = doc.getElementsByClass("wprm-recipe");
@@ -39,6 +43,56 @@ public class RecipeParse {
       return recipe;
     }
     
+    return recipe;
+  }
+
+  private static Recipe allrecipesParse(Document doc, Recipe recipe) {
+    // get recipe name
+    Elements name = doc.getElementsByClass("article-heading");
+    recipe.setRecipeName(name.text());
+
+    // get ingredients -----------
+    Elements ingredients = doc.getElementsByClass("mntl-structured-ingredients__list-item ");
+
+    ArrayList<String> recipeIngredients = new ArrayList<String>();
+    // for each section of the ingredients list
+    for (Element item : ingredients) {
+
+      // get the quantity  
+      String quantity = item.select("span[data-ingredient-quantity=\"true\"]").text();
+      // get the unit  
+      String unit = item.select("span[data-ingredient-unit=\"true\"]").text();
+      // get the name  
+      String ingredientName = item.select("span[data-ingredient-name=\"true\"]").text();
+      
+      String newIngredient = quantity + " " + unit + " " + ingredientName;
+
+      recipeIngredients.add(newIngredient);
+    }
+    // set the value of ingredients in recipe
+    String[] recipeIngredientsArray = new String[recipeIngredients.size()];
+    recipeIngredientsArray = recipeIngredients.toArray(recipeIngredientsArray);
+    recipe.setIngredients(recipeIngredientsArray);
+
+    // get procedure -----------
+    Elements procedureSection = doc.getElementsByClass("recipe__steps-content");
+    
+    // create recipeProcedure arrayList to hold procedure 
+    ArrayList<String> recipeProcedure = new ArrayList<String>();
+
+    // for each element in procedure section
+    for (Element element : procedureSection) {
+      // get the p elements
+      Elements steps = element.getElementsByTag("p");
+      for (Element step : steps) { 
+        recipeProcedure.add(step.text());
+      }
+    }
+    // set procedure
+    String[] recipeProcedureArray = new String[recipeProcedure.size()];
+    recipeProcedureArray = recipeProcedure.toArray(recipeProcedureArray);
+    recipe.setProcedure(recipeProcedureArray);
+
     return recipe;
   }
 
