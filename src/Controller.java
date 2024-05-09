@@ -125,6 +125,9 @@ public class Controller {
 
     // add mouseListener to jList
     jlist.addMouseListener(mouseListener);
+    
+    // change formatting 
+    jlist.setFont( new Font("Arial", Font.PLAIN, 16) );
 
     // add jlist to JScrollPane
     JScrollPane scrollPane = new JScrollPane(jlist);

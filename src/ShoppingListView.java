@@ -16,6 +16,8 @@ public class ShoppingListView {
     // create panel
     JPanel panel = new JPanel();
     panel.setLayout(new BorderLayout());
+    // set a border for the panel
+    panel.setBorder(BorderFactory.createEmptyBorder(0,30,30,30));
 
     // create toolbar
     JPanel buttonPanel = new JPanel();
@@ -52,6 +54,7 @@ public class ShoppingListView {
         // Call clearList from shopping list to clear the list
         ShoppingList.clearList();
         System.out.println("clearButton Pressed.");
+        reloadPanel();
       }
     });
 

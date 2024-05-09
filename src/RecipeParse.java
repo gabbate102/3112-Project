@@ -23,26 +23,32 @@ public class RecipeParse {
     Recipe recipe = new Recipe();
     recipe.setURL(url);
 
-    // downloading the target website with an HTTP GET request
-    Document doc = Jsoup.connect(url).get();
-    
-    // check if the recipe is from all recipes
-    if (url.contains("allrecipes")) { 
-      recipe = allrecipesParse(doc, recipe);
-      return recipe;
-    }
+    try {
+      // downloading the target website with an HTTP GET request
+      Document doc = Jsoup.connect(url).get();
+      // check if the recipe is from all recipes
+      if (url.contains("allrecipes")) { 
+        recipe = allrecipesParse(doc, recipe);
+        return recipe;
+      }
 
-    // Check for WordPress Recipe Maker parsing
-    // Get the recipe block
-    Elements recipeBlock = doc.getElementsByClass("wprm-recipe");
-    // Check if recipeBlock is empty, return an empty recipe if it is
-    if (recipeBlock.toString().length() > 1) {
-      // call wprmParse
-      recipe = wprmParse(doc, recipe);
-    } else {
+      // Check for WordPress Recipe Maker parsing
+      // Get the recipe block
+      Elements recipeBlock = doc.getElementsByClass("wprm-recipe");
+      // Check if recipeBlock is empty, return an empty recipe if it is
+      if (recipeBlock.toString().length() > 1) {
+        // call wprmParse
+        recipe = wprmParse(doc, recipe);
+      } else {
+        return recipe;
+      }
+    } catch (java.net.MalformedURLException e) {
+      System.out.println(e);
+      return recipe;
+    } catch (org.jsoup.HttpStatusException o) {
+      System.out.println(o);
       return recipe;
     }
-    
     return recipe;
   }
 

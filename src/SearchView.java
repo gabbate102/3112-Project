@@ -21,6 +21,8 @@ public class SearchView {
     JPanel searchPanel = new JPanel();
     // set searchPanel layout to borderLayout
     searchPanel.setLayout(new BorderLayout());
+    // set a border for the panel
+    searchPanel.setBorder(BorderFactory.createEmptyBorder(0,30,30,30));
 
     // create toolBar
     JPanel toolBar = new JPanel();
@@ -81,6 +83,9 @@ public class SearchView {
     // create recipeList for listModel contents
     getListModel();
     JList<String> recipeList = new JList<String>(listModel);
+
+    // change formatting 
+    recipeList.setFont( new Font("Arial", Font.PLAIN, 16) );
 
     // add a mouseListener to the elements of recipeList
     MouseListener mouseListener = new MouseAdapter() {
