@@ -5,14 +5,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.*;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.io.IOException;
 
 /**
  * RecipeParse class implements the jsoup library
  */
 public class RecipeParse {
-  private Dictionary<String, String[]> recipeFormatting;
 
   /**
    * parseRecipe takes a url and parses the data from the website to create a recipe object.
@@ -28,8 +26,10 @@ public class RecipeParse {
     // downloading the target website with an HTTP GET request
     Document doc = Jsoup.connect(url).get();
     
+    // check if the recipe is from all recipes
     if (url.contains("allrecipes")) { 
       recipe = allrecipesParse(doc, recipe);
+      return recipe;
     }
 
     // Check for WordPress Recipe Maker parsing
